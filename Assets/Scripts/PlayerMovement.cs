@@ -1,14 +1,18 @@
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private String[] deaths;
     private bool jumpState;
     [SerializeField] private float speed;
     private Rigidbody2D body;
     private Animator anim;
 
     private void Awake()
-    {
+    { 
+        deaths = new[] {"rock","BSS","BS"};
         jumpState = false;
         speed = 3;
         body = GetComponent<Rigidbody2D>();
@@ -40,9 +44,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (deaths.Contains(collision.gameObject.name)){
+            Debug.Log("YOU DIED");
+        }
         if (collision.gameObject.tag == "Ground")
         {
             jumpState = false;
         }
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {       
+            if (collision.gameObject.name == "2"){
+                jumpState = false;
+            }
     }
 }

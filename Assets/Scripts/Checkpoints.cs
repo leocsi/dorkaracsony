@@ -4,6 +4,7 @@ using System;
 public class Checkpoints : MonoBehaviour
 {
     public GameObject player;
+    public GameObject previous;
     private BoxCollider2D trigger;
     private int current;
     private Vector3 currentPos;
@@ -39,16 +40,11 @@ public class Checkpoints : MonoBehaviour
         catch (Exception e)
         {
             triggeredName = current;
-            Debug.Log(trigger.gameObject.name);
         }
         if (triggeredName != current){
             current++;
-            currentPos = collision.gameObject.transform.position;
-            Debug.Log("Checkpoint " + current + "reached");
+            currentPos = trigger.gameObject.transform.position;
+        
         } 
-        else 
-        {
-            Debug.Log("Checkpoint " + current + "Passed");
-        }
     }
 }
